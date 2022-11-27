@@ -27,4 +27,26 @@ describe('Block', () => {
             expect(genesisBlock).toEqual(GENESIS_DATA);
         })
     })
+
+    describe('mineBlock()', () => {
+        const lastBlock = Block.genesis();
+        const data = 'mined data';
+        const mineBlock = Block.mineBlock({ lastBlock, data })
+
+        it('returns a Block instance', () => {
+            expect(mineBlock instanceof Block).toBe(true);
+        })
+
+        it('sets thee`lastHash` to the `hash` of the lastBlock', () => {
+            expect(mineBlock.lastHash).toEqual(lastBlock.hash);
+        })
+
+        it('sets the `data`', () => {
+            expect(mineBlock.data).toEqual(data);
+        })
+
+        it('sets a `timestamp`', () => {
+            expect(mineBlock.timestamp).not.toEqual(undefined);
+        })
+    })
 })
