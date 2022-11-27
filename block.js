@@ -24,8 +24,8 @@ class Block {
         do {
             nonce++;
             timestamp = Date.now();
-            difficulty = Block.adjustDifficulty({ originalBlock: lastBlock, timestamp })
-            hash = cryptoHash(timestamp, lastHash, data, nonce, difficulty)
+            difficulty = Block.adjustDifficulty({ originalBlock: lastBlock, timestamp });
+            hash = cryptoHash(timestamp, lastHash, data, nonce, difficulty);
         } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty))
 
         return new Block({ timestamp, lastHash, data, difficulty, nonce, hash })
@@ -33,6 +33,8 @@ class Block {
 
     static adjustDifficulty({ originalBlock, timestamp }) {
         const { difficulty } = originalBlock;
+
+        if (difficulty < 1) return 1;
 
         if ((timestamp - originalBlock.timestamp) > MINE_RATE) return difficulty - 1;
 
