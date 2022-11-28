@@ -8,7 +8,7 @@ A backend + frontend with Node.js, Express, React, &amp; more...
 - [ ] Full frontend React.js web application.
 - [ ] Deployed to production (with multiple servers).
 - [x] API around the Blockchain.
-- [ ] Real-time connected peer-to-peer server with a pub/sub implementation.
+- [x] Real-time connected peer-to-peer server with a pub/sub implementation.
 - [ ] Proof-of-work algorithm.
 - [ ] Signed Transactions with cryptography and digital signature.
 - [ ] Transaction Pool for a real-time list of incoming data.
