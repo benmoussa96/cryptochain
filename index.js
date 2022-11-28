@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const Blockchain = require('./blockchain');
 const PubSub = require('./pubsub');
 
-const PORT = 3000;
-
 const app = express();
 const blockchain = new Blockchain();
 const pubsub = new PubSub({ blockchain });
@@ -25,8 +23,18 @@ app.post(
 
         blockchain.addBlock({ data });
 
+        pubsub.broadcastChain();
+
         res.redirect('/api/blocks');
     }
 );
 
+const DEFAULT_PORT = 3000;
+let PEER_PORT;
+
+if (process.env.GENERATE_PEER_PORT === 'true') {
+    PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
+}
+
+const PORT = PEER_PORT || DEFAULT_PORT;
 app.listen(PORT, () => console.log(`Listening at localhost:${PORT}`));
