@@ -12,7 +12,9 @@ const CHANNELS = {
 }
 
 class PubSub {
-    constructor() {
+    constructor({ blockchain }) {
+        this.blockchain = blockchain;
+
         this.pubnub = new PubNub(credentials);
 
         this.pubnub.subscribe({ channels: Object.values(CHANNELS) });
@@ -22,15 +24,27 @@ class PubSub {
 
     listener() {
         return {
-            message: messageObject => {
-                const { channel, message } = messageObject;
+            message: ({ channel, message }) => {
                 console.log(`Message recieved. Channel: ${channel} - Message: ${message}`);
+
+                const parsedMessage = JSON.parse(message);
+
+                if (channel === CHANNELS.BLOCKCHAIN) {
+                    this.blockchain.replaceChain(parsedMessage);
+                }
             }
         }
     }
 
     publisher({ channel, message }) {
         this.pubnub.publish({ channel, message });
+    }
+
+    broadcastChain() {
+        this.publisher({
+            channel: CHANNELS.BLOCKCHAIN,
+            message: JSON.stringify(this.blockchain.chain)
+        });
     }
 }
 
