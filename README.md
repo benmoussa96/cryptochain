@@ -7,7 +7,7 @@ A backend + frontend with Node.js, Express, React, &amp; more...
 - [x] Full test suite for the backend.
 - [ ] Full frontend React.js web application.
 - [ ] Deployed to production (with multiple servers).
-- [ ] API around the Blockchain.
+- [x] API around the Blockchain.
 - [ ] Real-time connected peer-to-peer server with a pub/sub implementation.
 - [ ] Proof-of-work algorithm.
 - [ ] Signed Transactions with cryptography and digital signature.
