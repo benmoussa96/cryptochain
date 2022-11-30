@@ -25,7 +25,9 @@ class PubSub {
     listener() {
         return {
             message: ({ channel, message }) => {
-                console.log(`Message recieved. Channel: ${channel} - Message: ${message}`);
+                console.log('==> Message recieved.');
+                console.log(`Channel: ${channel}`);
+                console.log(`Message: ${message}`);
 
                 const parsedMessage = JSON.parse(message);
 

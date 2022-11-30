@@ -1,8 +1,8 @@
 # cryptochain
-Full-stack blockchain+crypto application built from scratch!  
+Full-stack blockchain and cryptocurrency application built from SCRATCH!  
 A backend + frontend with Node.js, Express, React, &amp; more...
 
-- [x] Blockchain built in the object-oriented programming style.
+- [x] Blockchain-powered cryptocurrency built in the object-oriented programming style.
 - [x] Full-on backend with test-driven approach.
 - [x] Full test suite for the backend.
 - [ ] Full frontend React.js web application.
