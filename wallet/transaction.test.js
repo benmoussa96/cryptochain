@@ -76,7 +76,7 @@ describe('Transaction', () => {
         describe('when the transaction is invalid', () => {
             describe('and a transaction outputMap value is invalid', () => {
                 it('returns false and logs an error', () => {
-                    transaction.outputMap[senderWallet.publicKey] = 999999;
+                    transaction.outputMap[senderWallet.publicKey] = 999999999;
 
                     expect(Transaction.validTransaction(transaction)).toBe(false);
                     expect(errorMock).toHaveBeenCalled();
@@ -97,31 +97,58 @@ describe('Transaction', () => {
     describe('update()', () => {
         let originalSignature, originalSenderOutput, nextRecipient, nextAmount;
 
-        beforeEach(() => {
-            originalSignature = transaction.input.signature;
-            originalSenderOutput = transaction.outputMap[senderWallet.publicKey];
-            nextRecipient = 'next=recipient';
-            nextAmount = 50;
+        describe('and the amount is valid', () => {
+            beforeEach(() => {
+                originalSignature = transaction.input.signature;
+                originalSenderOutput = transaction.outputMap[senderWallet.publicKey];
+                nextRecipient = 'next=recipient';
+                nextAmount = 50;
 
-            transaction.update({ senderWallet, recipient: nextRecipient, amount: nextAmount });
-        })
+                transaction.update({ senderWallet, recipient: nextRecipient, amount: nextAmount });
+            })
 
-        it('outputs the new `amount` to the next recipient', () => {
-            expect(transaction.outputMap[nextRecipient]).toEqual(nextAmount);
+            it('outputs the new `amount` to the next recipient', () => {
+                expect(transaction.outputMap[nextRecipient]).toEqual(nextAmount);
+            });
+
+            it('subtracts the new `amount` from the original sender output amount', () => {
+                expect(transaction.outputMap[senderWallet.publicKey]).toEqual(originalSenderOutput - nextAmount);
+            });
+
+            it('maintains a total output that matches the input amount', () => {
+                expect(
+                    Object.values(transaction.outputMap).reduce((total, outputAmount) => total + outputAmount)
+                ).toEqual(transaction.input.amount);
+            });
+
+            it('resigns the transaction', () => {
+                expect(transaction.input.signature).not.toEqual(originalSignature);
+            });
+
+            describe('and the recipient is the same', () => {
+                let addedAmount;
+
+                beforeEach(() => {
+                    addedAmount = 80;
+                    transaction.update({ senderWallet, recipient: nextRecipient, amount: addedAmount });
+                });
+
+                it('adds to the recipient amount', () => {
+                    expect(transaction.outputMap[nextRecipient]).toEqual(nextAmount + addedAmount);
+                });
+
+                it('subtracts from the original sender output amount', () => {
+                    expect(transaction.outputMap[senderWallet.publicKey]).toEqual(originalSenderOutput - nextAmount - addedAmount);
+                });
+            });
         });
 
-        it('subtracts the new `amount` from the original sender output amount', () => {
-            expect(transaction.outputMap[senderWallet.publicKey]).toEqual(originalSenderOutput - nextAmount);
-        });
-
-        it('maintains a total output that matches the input amount', () => {
-            expect(
-                Object.values(transaction.outputMap).reduce((total, outputAmount) => total + outputAmount)
-            ).toEqual(transaction.input.amount);
-        });
-
-        it('resigns the transaction', () => {
-            expect(transaction.input.signature).not.toEqual(originalSignature);
+        describe('and the amount is invalid', () => {
+            it('throws an error', () => {
+                expect(() => {
+                    transaction.update({ senderWallet, recipient: nextRecipient, amount: 999999999 });
+                }).toThrow('Amount exceeds the balance');
+            });
         });
     });
 })
