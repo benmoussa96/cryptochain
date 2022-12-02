@@ -1,4 +1,4 @@
-# cryptochain
+# Cryptochain
 Full-stack blockchain and cryptocurrency application built from SCRATCH!  
 A backend + frontend with Node.js, Express, React, &amp; more...
 

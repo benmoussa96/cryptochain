@@ -13,6 +13,10 @@ class Wallet {
     sign(data) {
         return this.keyPair.sign(cryptoHash(data));
     }
+
+    createTransaction({ amount, recipient }) {
+
+    }
 }
 
 module.exports = Wallet;
