@@ -64,7 +64,7 @@ describe('Wallet', () => {
             });
 
             it('matches the transaction input with the wallet', () => {
-                expeect(transaction.input.address).toEqual(wallet.publicKey);
+                expect(transaction.input.address).toEqual(wallet.publicKey);
             });
 
             it('outputs the amount to the recipient', () => {
