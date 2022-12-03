@@ -11,5 +11,5 @@ A backend + frontend with Node.js, Express, React, &amp; more...
 - [x] Real-time connected peer-to-peer server with a pub/sub implementation.
 - [x] Proof-of-work algorithm.
 - [x] Signed Transactions with cryptography and digital signature.
-- [ ] Transaction Pool for a real-time list of incoming data.
-- [ ] Includes transactions in core blocks of the chain.
+- [x] Transaction Pool for a real-time list of incoming data.
+- [x] Includes transactions in core blocks of the chain.
