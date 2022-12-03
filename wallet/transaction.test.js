@@ -1,6 +1,7 @@
 const Transaction = require('./transaction');
 const Wallet = require('./index');
 const { verifySignature } = require('../util');
+const { REWARD_INPUT } = require('../config');
 
 describe('Transaction', () => {
     let transaction, senderWallet, recipient, amount;
@@ -149,6 +150,23 @@ describe('Transaction', () => {
                     transaction.update({ senderWallet, recipient: nextRecipient, amount: 999999999 });
                 }).toThrow('Amount exceeds the balance');
             });
+        });
+    });
+
+    describe('rewardTransaction()', () => {
+        let rewardTransaction, miinerWallet;
+
+        beforeEach(() => {
+            miinerWallet = new Wallet();
+            rewardTransation = Transaction.rewardTransaction({ miinerWallet });
+        });
+
+        it('creates a transaction with the reward input', () => {
+            expect(rewardTransaction.input).toEqual(REWARD_INPUT);
+        });
+
+        it('creates one transaction for the miner with the `MINING_REWARD`', () => {
+            expect(rewardTransaction.input).toEqual(REWARD_INPUT);
         });
     });
 })
