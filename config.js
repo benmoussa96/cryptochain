@@ -12,7 +12,7 @@ const GENESIS_DATA = {
 
 const STARTING_BALANCE = 1000;
 
-const REWARD_INPUT = { address: '*authorised-rew*' }
+const REWARD_INPUT = { address: '*authorised-reward*' }
 
 const MINING_REWARD = 50;
 
