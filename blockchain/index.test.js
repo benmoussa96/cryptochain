@@ -193,7 +193,13 @@ describe('Blockchain', () => {
 
             describe('and the transaction is a reward transaction', () => {
                 it('returns false', () => {
+                    rewardTransaction.outputMap[wallet.publicKey] = 999999999;
 
+                    newChain.addBlock({ data: [transaction, rewardTransaction] });
+
+                    expect(
+                        blockchain.validTransactionData({ chain: newChain.chain })
+                    ).toBe(false);
                 });
             });
         });
