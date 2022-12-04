@@ -49,6 +49,11 @@ class Blockchain {
             return;
         }
 
+        if (!this.validTransactionData({ chain })) {
+            console.error('The incoming chain has invalid transaction data')
+            return;
+        }
+
         if (onSuccess) onSuccess();
 
         console.log('Replacing chain with', chain);
@@ -91,7 +96,7 @@ class Blockchain {
                     }
 
                     if (transactionSet.has(transaction)) {
-                        console.error('An identical transaction apprears more than once in the block');
+                        console.error('Duplicate transaction apprears in the block');
                         return false;
                     } else {
                         transactionSet.add(transaction);

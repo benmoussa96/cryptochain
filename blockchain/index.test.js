@@ -9,7 +9,7 @@ describe('Blockchain', () => {
 
     beforeEach(() => {
         blockchain = new Blockchain();
-        newChain = new Blockchain()
+        newChain = new Blockchain();
         originalChain = blockchain.chain;
 
         errorMock = jest.fn();
@@ -98,7 +98,14 @@ describe('Blockchain', () => {
 
         describe('when the new chain is not longer', () => {
             beforeEach(() => {
-                newChain.chain[0] = { new: 'chain' };
+                newChain.chain[0] = {
+                    timestamp: 123,
+                    lastHash: 'fake-last-hash',
+                    hash: 'fake-hash',
+                    difficulty: 0,
+                    nonce: 0,
+                    data: []
+                };
 
                 blockchain.replaceChain(newChain.chain);
             })
@@ -113,13 +120,22 @@ describe('Blockchain', () => {
 
         describe('when the new chain is longer', () => {
             beforeEach(() => {
-                newChain.addBlock({ data: 'first block data' });
-                newChain.addBlock({ data: 'second block data' });
-                newChain.addBlock({ data: 'third block data' });
+                const wallet = new Wallet();
+
+                newChain.addBlock({
+                    data: [wallet.createTransaction({ recipient: 'foo-address-one', amount: 39 })]
+                });
+                newChain.addBlock({
+                    data: [wallet.createTransaction({ recipient: 'foo-address-two', amount: 25 })]
+                });
+                newChain.addBlock({
+                    data: [wallet.createTransaction({ recipient: 'foo-address-three', amount: 60 })]
+                });
             })
 
             describe('and the new chain is invalid', () => {
                 beforeEach(() => {
+                    console.log(newChain);
                     newChain.chain[2].hash = 'some fake hash';
 
                     blockchain.replaceChain(newChain.chain);
