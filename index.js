@@ -10,7 +10,7 @@ const TransactionMiner = require('./app/transaction-miner');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
@@ -94,7 +94,7 @@ app.get('/api/wallet-info',
 
 app.get('*',
     (req, res) => {
-        res.sendFile(path.join(__dirname, './client/index.html'));
+        res.sendFile(path.join(__dirname, './client/dist/index.html'));
     }
 );
 
