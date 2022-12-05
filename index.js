@@ -153,6 +153,7 @@ for (let i = 0; i < 10; i++) {
         walletFooAction();
         walletBarAction();
     }
+
     transactionMiner.mineTransactions();
 }
 
