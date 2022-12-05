@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class App extends Component {
     state = {
-        walletInfo: { address: '0xfoo', balance: 9999 }
+        walletInfo: {}
     };
 
     componentDidMount() {
