@@ -35,7 +35,8 @@ body {
 }
 
 .Blocks,
-.ConductTransaction {
+.ConductTransaction,
+.TransactionPool {
     margin: 10%;
 }
 
