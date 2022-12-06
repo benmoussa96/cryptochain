@@ -27,9 +27,15 @@ body {
     border: 1px solid #fff;
     padding: 5%;
     margin: 2%;
-    width: 700px;
+    /* width: 700px; */
 }
 
 .Transaction {
     padding: 5%;
+}
+
+a,
+a:hover {
+    color: #e66;
+    text-decoration: underline;
 }
