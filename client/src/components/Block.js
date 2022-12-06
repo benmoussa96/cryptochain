@@ -57,12 +57,13 @@ class Block extends Component {
     }
 
     render() {
-        const { timestamp, hash } = this.props.block;
+        const { blockNumber, timestamp, hash } = this.props.block;
 
         const hashDisplay = `${hash.substring(0, 15)}...`;
 
         return (
             <div className='Block'>
+                <div>Number: {blockNumber}</div>
                 <div>Hash: {hashDisplay}</div>
                 <div>Timestamp: {new Date(timestamp).toLocaleString()}</div>
                 {this.displayTransaction}

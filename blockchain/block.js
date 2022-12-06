@@ -3,7 +3,8 @@ const { cryptoHash } = require("../util");
 const hexToBinary = require('hex-to-binary');
 
 class Block {
-    constructor({ timestamp, lastHash, hash, data, nonce, difficulty }) {
+    constructor({ blockNumber, timestamp, lastHash, hash, data, nonce, difficulty }) {
+        this.blockNumber = blockNumber;
         this.timestamp = timestamp;
         this.lastHash = lastHash;
         this.hash = hash;
@@ -19,6 +20,7 @@ class Block {
     static mineBlock({ lastBlock, data }) {
         let hash, timestamp;
         const lastHash = lastBlock.hash;
+        const blockNumber = lastBlock.blockNumber + 1;
         let { difficulty } = lastBlock;
         let nonce = 0;
 
@@ -29,7 +31,7 @@ class Block {
             hash = cryptoHash(timestamp, lastHash, data, nonce, difficulty);
         } while (hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty))
 
-        return new Block({ timestamp, lastHash, data, difficulty, nonce, hash })
+        return new Block({ blockNumber, timestamp, lastHash, data, difficulty, nonce, hash })
     }
 
     static adjustDifficulty({ originalBlock, timestamp }) {

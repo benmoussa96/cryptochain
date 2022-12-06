@@ -2,6 +2,7 @@ const MINE_RATE = 1000;
 const INITIAL_DIFFICULTY = 3;
 
 const GENESIS_DATA = {
+    blockNumber: 0,
     timestamp: 1,
     lastHash: '-----',
     hash: 'hash-one',
