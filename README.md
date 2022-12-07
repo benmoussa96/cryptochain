@@ -5,7 +5,7 @@ A backend + frontend with Node.js, Express, React, &amp; more...
 - [x] Blockchain-powered cryptocurrency built in the object-oriented programming style.
 - [x] Full backend with test-driven approach.
 - [x] Full test suite for the backend.
-- [ ] Full frontend React.js web application.
+- [x] Full frontend React.js web application.
 - [ ] Deployed to production (with multiple servers).
 - [x] API around the Blockchain.
 - [x] Real-time connected peer-to-peer server with a pub/sub implementation.
