@@ -14,8 +14,6 @@ class Blocks extends Component {
     }
 
     render() {
-        console.log('Blocks:', this.state);
-
         return (
             <div className='Blocks'>
                 <div><Link to='/'>Home</Link></div>
