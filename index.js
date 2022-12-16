@@ -18,7 +18,7 @@ const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool });
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
-const DEFAULT_PORT = process.env.PORT;
+const DEFAULT_PORT = process.env.PORT || 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
 app.get('/api/blocks',
