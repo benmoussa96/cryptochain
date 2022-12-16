@@ -18,7 +18,7 @@ const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool, wallet });
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
-const isDevelopment = pricess.env.ENV === 'development';
+const isDevelopment = process.env.ENV === 'development';
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
