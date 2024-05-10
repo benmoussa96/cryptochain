@@ -1,7 +1,7 @@
 # Cryptochain
-Full-stack layer 1 blockchain & cryptocurrency built in JavaScript
-Core blockchain + frontend (block explorer)
-Built with Node.js, Express, React, &amp; more...
+Full-stack layer 1 blockchain & cryptocurrency built in JavaScript<br/><br/>
+Core blockchain + frontend (block explorer)<br/><br/>
+Built with Node.js, Express, React, &amp; more...<br/><br/>
 
 - [x] Blockchain-powered cryptocurrency built in the object-oriented programming style.
 - [x] Full core backend with test-driven approach.
